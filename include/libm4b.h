@@ -31,9 +31,13 @@ enum m4b_error
     M4B_ERROR_INTERNAL_ERROR
 };
 
-/// Get the version of the library
+/// Get the version of the library as an integer
 /// \return The version of the library
-LIBM4B_API const char* LIBM4B_CALL m4b_get_version();
+LIBM4B_API m4b_int_t LIBM4B_CALL m4b_get_version();
+
+/// Get the version of the library as an string
+/// \return The version of the library
+LIBM4B_API const char* LIBM4B_CALL m4b_get_version_string();
 
 /// Open a M4B file
 /// \param filename The path to the M4B file
