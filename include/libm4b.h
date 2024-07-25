@@ -8,6 +8,8 @@ extern "C" {
 #define LIBM4B_API
 #define LIBM4B_CALL _cdecl
 
+#define LIBM4B_VERSION 100
+
 struct M4BFile;
 
 typedef M4BFile* m4b_t;
