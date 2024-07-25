@@ -9,6 +9,7 @@ extern "C" {
 #define LIBM4B_CALL _cdecl
 
 #define LIBM4B_VERSION 100
+#define LIBM4B_VERSION_STRING "1.0.0"
 
 struct M4BFile;
 
