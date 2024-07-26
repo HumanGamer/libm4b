@@ -16,6 +16,7 @@ struct M4BFile;
 typedef M4BFile* m4b_t;
 typedef int m4b_error_t;
 typedef int m4b_int_t;
+typedef unsigned int m4b_uint_t;
 typedef unsigned char* m4b_byte_t;
 
 enum m4b_error
@@ -31,19 +32,26 @@ enum m4b_error
     M4B_ERROR_INTERNAL_ERROR
 };
 
+enum m4b_flags
+{
+    M4B_FLAG_NONE = 0,
+    M4B_FLAG_TREAT_SUB_M4B_AS_DIR = 1 << 0, // Treat sub m4b files as directories
+};
+
 /// Get the version of the library as an integer
 /// \return The version of the library
-LIBM4B_API m4b_int_t LIBM4B_CALL m4b_get_version();
+LIBM4B_API m4b_uint_t LIBM4B_CALL m4b_get_version();
 
-/// Get the version of the library as an string
+/// Get the version of the library as a string
 /// \return The version of the library
 LIBM4B_API const char* LIBM4B_CALL m4b_get_version_string();
 
 /// Open a M4B file
 /// \param filename The path to the M4B file
+/// \param flags The flags to open the M4B file with
 /// \param m4b A pointer to the M4B file handle
 /// \return 0 on success, non-zero on failure
-LIBM4B_API m4b_error_t LIBM4B_CALL m4b_open(const char* filename, m4b_t** m4b);
+LIBM4B_API m4b_error_t LIBM4B_CALL m4b_open(const char* filename, m4b_uint_t flags, m4b_t** m4b);
 
 /// Create a M4B file
 /// \param m4b A pointer to the M4B file handle
@@ -64,7 +72,7 @@ LIBM4B_API m4b_int_t LIBM4B_CALL m4b_get_file_count(m4b_t m4b);
 /// \param m4b The M4B file handle
 /// \param index The index of the file
 /// \return The size of the file
-LIBM4B_API m4b_int_t LIBM4B_CALL m4b_get_file_size(m4b_t m4b, m4b_int_t index);
+LIBM4B_API m4b_uint_t LIBM4B_CALL m4b_get_file_size(m4b_t m4b, m4b_int_t index);
 
 /// Read a file from the M4B file
 /// \param m4b The M4B file handle
@@ -72,7 +80,7 @@ LIBM4B_API m4b_int_t LIBM4B_CALL m4b_get_file_size(m4b_t m4b, m4b_int_t index);
 /// \param buffer A pointer to the buffer to read the file into
 /// \param size The size of the buffer
 /// \return 0 on success, non-zero on failure
-LIBM4B_API m4b_error_t LIBM4B_CALL m4b_read_file(m4b_t m4b, m4b_int_t index, m4b_byte_t* buffer, m4b_int_t size);
+LIBM4B_API m4b_error_t LIBM4B_CALL m4b_read_file(m4b_t m4b, m4b_int_t index, m4b_byte_t* buffer, m4b_uint_t size);
 
 /// Get the error message for a given error code
 /// \param error The error code
@@ -92,7 +100,7 @@ LIBM4B_API m4b_error_t LIBM4B_CALL m4b_add_file(m4b_t m4b, const char* target, c
 /// \param buffer A pointer to the buffer to read the file from
 /// \param size The size of the buffer
 /// \return 0 on success, non-zero on failure
-LIBM4B_API m4b_error_t LIBM4B_CALL m4b_add_file_from_memory(m4b_t m4b, const char* target, m4b_byte_t buffer, m4b_int_t size);
+LIBM4B_API m4b_error_t LIBM4B_CALL m4b_add_file_from_memory(m4b_t m4b, const char* target, m4b_byte_t buffer, m4b_uint_t size);
 
 /// Remove a file from the M4B file
 /// \param m4b The M4B file handle

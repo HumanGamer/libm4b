@@ -9,6 +9,7 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         m4b.cpp
         m4b.hpp
+        libm4b.cpp
 
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include/libm4b.h
