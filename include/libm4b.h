@@ -8,9 +8,6 @@ extern "C" {
 #define LIBM4B_API
 #define LIBM4B_CALL _cdecl
 
-#define LIBM4B_VERSION 100
-#define LIBM4B_VERSION_STRING "1.0.0"
-
 struct M4BFile;
 
 typedef M4BFile* m4b_t;
@@ -22,13 +19,16 @@ typedef unsigned char* m4b_byte_t;
 enum m4b_error
 {
     M4B_ERROR_NONE = 0,
+    M4B_ERROR_FILE_FAILED_TO_OPEN,
     M4B_ERROR_FILE_NOT_FOUND,
     M4B_ERROR_FILE_ALREADY_EXISTS,
     M4B_ERROR_READ_ERROR,
     M4B_ERROR_WRITE_ERROR,
     M4B_ERROR_INVALID_FILE,
+    M4B_ERROR_INVALID_VERSION,
     M4B_ERROR_INVALID_ARGUMENT,
     M4B_ERROR_OUT_OF_MEMORY,
+    M4B_ERROR_NOT_IMPLEMENTED,
     M4B_ERROR_INTERNAL_ERROR
 };
 
@@ -37,14 +37,6 @@ enum m4b_flags
     M4B_FLAG_NONE = 0,
     M4B_FLAG_TREAT_SUB_M4B_AS_DIR = 1 << 0, // Treat sub m4b files as directories
 };
-
-/// Get the version of the library as an integer
-/// \return The version of the library
-LIBM4B_API m4b_uint_t LIBM4B_CALL m4b_get_version();
-
-/// Get the version of the library as a string
-/// \return The version of the library
-LIBM4B_API const char* LIBM4B_CALL m4b_get_version_string();
 
 /// Open a M4B file
 /// \param filename The path to the M4B file
